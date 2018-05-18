@@ -56,7 +56,7 @@ class SwipeScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'SwipeScreen',
     headerStyle: {
-      backgroundColor: 'rgba(255,255,255,1)',
+      backgroundColor: '#052743',
     },
   })
 
@@ -66,12 +66,13 @@ class SwipeScreen extends Component {
     }
   }
 
-  state={
-  }
-
   _renderItem({item, index}) {
     return (
-      <View style={{flex: 1, justifyContent: 'flex-end'}}>
+      <View style={{flex: 1, justifyContent: 'flex-end', width: '100%', backgroundColor: 'black'}}>
+        <Image
+          style= {{height: '100%', width: '100%', position: 'absolute', opacity: 0.8, backgroundColor: 'black' }}
+          source={{uri: item.image}}
+        />
         <View style={{width: 300, height: 200, alignSelf: 'center', marginBottom: 20, flexDirection: 'row'}}>
           <TouchableOpacity onPress={()=>(openMap({ latitude: 37.865101, longitude: -119.538330 }))} style={{backgroundColor: 'white', width: 100}}>
             <Image
@@ -98,19 +99,12 @@ class SwipeScreen extends Component {
   render() {
     return(
       <View style={{flex: 1}}>
-        {this.state.club &&
-          <Image
-            style= {{height: '100%', width: '100%', position: 'absolute', opacity: 0.8, backgroundColor: 'black' }}
-            source={this.state.club}
-          />
-        }
-
         <Carousel
           ref={(c) => { this._carousel = c; }}
           data={data}
           renderItem={this._renderItem}
           sliderWidth={Dimensions.get('window').width}
-          itemWidth={340}
+          itemWidth={Dimensions.get('window').width}
           onSnapToItem={(element)=>{ this.setState({club: {uri: data[element].image} })}}
         />
       </View>
